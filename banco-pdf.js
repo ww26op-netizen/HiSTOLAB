@@ -1,4 +1,4 @@
-// Banco activo de HistoLab: únicamente las 15 fotografías complementarias seleccionadas.
+// Banco activo de HistoLab: fotografías complementarias seleccionadas para RA1.
 // corte-01.jpg y corte-02.jpg se definen directamente en index.html.
 
 const cortesPdf = [
@@ -836,5 +836,53 @@ const cortesPdf = [
     ],
     "note": "La fotografía conserva las flechas rojas incluidas en el PDF original."
   }
-];
+  ,
+  {
+    "id": "musculo-liso-longitudinal",
+    "image": "musculo-liso-longitudinal.jpg",
+    "title": "Músculo liso · corte longitudinal",
+    "category": "Tejido muscular",
+    "status": "Microfotografía incorporada por el usuario",
+    "source": "Fotografía aportada por el usuario. Terminología cotejada con Apunte - Tejido muscular, clasificación morfofuncional: leiomiocitos fusiformes, no estriados y mononucleados centrales.",
+    "note": "Se observan células fusiformes dispuestas en haces, con núcleos centrales alargados y ausencia de estriaciones transversales. No se asigna un órgano específico porque la microfotografía no lo confirma.",
+    "questions": [
+      {
+        "label": 1,
+        "marker": [78, 19],
+        "target": [58, 32],
+        "prompt": "¿Qué tipo de tejido muscular se observa?",
+        "answers": [
+          "Músculo liso",
+          "musculo liso",
+          "tejido muscular liso"
+        ]
+      },
+      {
+        "label": 2,
+        "marker": [77, 45],
+        "target": [63, 46],
+        "prompt": "Identifica la estructura basófila alargada señalada.",
+        "answers": [
+          "Núcleo central",
+          "núcleo del leiomiocito",
+          "nucleo del leiomiocito",
+          "núcleo de la célula muscular lisa",
+          "núcleo"
+        ]
+      },
+      {
+        "label": 3,
+        "marker": [27, 63],
+        "target": [40, 58],
+        "prompt": "¿Cómo se llama la célula muscular fusiforme señalada?",
+        "answers": [
+          "Leiomiocito",
+          "célula muscular lisa",
+          "celula muscular lisa",
+          "miocito liso"
+        ]
+      }
+    ]
+  }
 
+];
