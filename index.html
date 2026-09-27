@@ -16,7 +16,7 @@
     .image-shell{background:#21132e;border:4px solid #e9d5ff;border-radius:18px;padding:13px;box-shadow:0 8px 25px #581c8740}.image-frame{position:relative;max-width:660px;margin:auto}.image-frame img{width:100%;height:auto;display:block;border-radius:6px}.arrows{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.arrows line{stroke:white;stroke-width:.55;paint-order:stroke;filter:drop-shadow(0 0 .35px #2d123c)}.arrows .shaft{stroke:#a21caf;stroke-width:.32}.marker{position:absolute;transform:translate(-50%,-50%);width:23px;height:23px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#ec4899,#9333ea);border:2px solid white;box-shadow:0 2px 6px #32143caa;font-size:11px;font-weight:800;pointer-events:none}.caption{color:#e9d5ff;font-size:12px;margin:9px 3px 1px}
     .question-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.question-card h2{font-size:21px;margin:0 0 5px;color:#581c87}.question-card .hint{font-size:14px;margin-bottom:15px}.item{border-top:1px solid #eee1f3;padding:14px 0}.item-head{display:flex;align-items:center;gap:9px;font-weight:700}.number{display:inline-grid;place-items:center;border-radius:50%;width:25px;height:25px;background:#fce7f3;color:#9d174d;font-size:12px;flex:none}.answer{width:100%;margin-top:8px;padding:10px 12px;border:1px solid #d9c6e3;border-radius:10px;color:var(--ink)}.answer.good{border-color:#16a34a;background:#f0fdf4}.answer.bad{border-color:#dc2626;background:#fef2f2}.feedback,.study-answer{font-size:13px;margin:5px 0 0}.feedback.good{color:#166534}.feedback.bad{color:#b91c1c}.study-answer{color:#6b21a8;background:#faf5ff;border-radius:8px;padding:7px 9px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.score{font-weight:800;color:#581c87;margin-top:11px;min-height:1.4em}.notice{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:13px;color:#7c2d12;font-size:14px}.source{font-size:12px;color:var(--muted);margin:14px 0 0}.bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px}.bottom p{margin:0;color:var(--muted);font-size:13px}
     @media(max-width:850px){.workspace{grid-template-columns:1fr}.counter{margin-left:0}header small{display:none}}@media(max-width:500px){.panel{padding:16px}.image-shell{padding:6px}.toolbar{align-items:stretch}.segmented button{flex:1}}
-    [hidden]{display:none!important}.zoom-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;color:white}.zoom-controls button{padding:6px 12px}.viewport{overflow:auto;max-height:75vh;border-radius:6px;touch-action:pan-x pan-y}.image-frame{max-width:none;margin:0}.timer{padding:10px;background:#f3e8ff;border-radius:10px;margin-bottom:12px;font-weight:700}.timer.urgent{background:#ffe4e6;color:#9f1239}button:disabled{cursor:default;opacity:.55}
+    [hidden]{display:none!important}.coming-soon{grid-column:1/-1;text-align:center;padding:64px 24px;background:linear-gradient(135deg,#fff1f7,#f3e8ff);border:1px solid #e9d5ff;border-radius:18px}.coming-soon h2{margin:12px 0 6px;color:#581c87;font-size:clamp(30px,5vw,48px)}.coming-soon p{margin:0;color:var(--muted)}.zoom-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;color:white}.zoom-controls button{padding:6px 12px}.viewport{overflow:auto;max-height:75vh;border-radius:6px;touch-action:pan-x pan-y}.image-frame{max-width:none;margin:0}.timer{padding:10px;background:#f3e8ff;border-radius:10px;margin-bottom:12px;font-weight:700}.timer.urgent{background:#ffe4e6;color:#9f1239}button:disabled{cursor:default;opacity:.55}
   </style>
 </head>
 <body>
@@ -24,11 +24,13 @@
   <main><div class="panel">
     <h1>Explora tus cortes</h1><p class="sub">Observa la punta de cada flecha e identifica la estructura señalada.</p>
     <div class="toolbar">
+      <div><label class="group-label" for="cut-select">Lista de cortes</label><select id="cut-select"></select></div>
       <div><label class="group-label" for="category">Categoría</label><select id="category"></select></div>
       <div><span class="group-label">Modo</span><div class="segmented" id="modes"><button type="button" data-mode="practice" class="active">Práctica</button><button type="button" data-mode="study">Estudio</button><button type="button" data-mode="exam">Examen</button></div></div>
     </div>
-    <div class="meta"><span class="pill" id="category-pill"></span><span class="pill" id="status-pill"></span><span class="counter" id="counter"></span></div>
+    <div class="meta"><span class="pill" id="ra-pill"></span><span class="pill" id="category-pill"></span><span class="pill" id="status-pill"></span><span class="counter" id="counter"></span></div>
     <div class="workspace">
+      <div class="coming-soon" id="coming-soon" hidden><span class="pill">RA2</span><h2>Próximamente</h2><p>Los cortes correspondientes al RA2 se agregarán aquí.</p></div>
       <div class="image-shell"><div class="zoom-controls"><button id="zoom-out" type="button" aria-label="Alejar">−</button><output id="zoom-level">100 %</output><button id="zoom-in" type="button" aria-label="Acercar">+</button><button id="zoom-reset" type="button">Ajustar</button><small>Desliza para recorrer la imagen ampliada.</small></div><div class="viewport" id="viewport"><div class="image-frame" id="image-frame"><img id="slide-image" alt=""><svg class="arrows" id="arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg><div id="markers"></div></div></div><p class="caption">Los números están fuera de las estructuras; la punta de cada flecha indica el lugar observado.</p></div>
       <section class="question-card" aria-live="polite"><h2 id="slide-title"></h2><p class="hint" id="mode-hint"></p><div class="timer" id="timer-box" hidden><span id="timer" role="timer" aria-label="Tiempo restante">00:30</span> · 30 segundos por corte <button type="button" id="start-exam">Iniciar examen</button></div><div id="questions"></div><div class="actions" id="actions"><button class="primary" id="check" type="button">Comprobar</button><button id="reset" type="button">Reintentar</button></div><div class="score" id="score" role="status"></div><p class="source" id="source"></p></section>
     </div>
@@ -65,8 +67,14 @@
   ];
 
   ampliarEstructuras(cortes);
+
+  // Organización por Resultado de Aprendizaje (RA).
+  // Todos los cortes que existen actualmente pertenecen a RA1.
+  // En el futuro, un corte nuevo puede definir por ejemplo: ra: 'RA2'.
+  cortes.forEach(corte => { if (!corte.ra) corte.ra = 'RA1'; });
+
   const $ = id => document.getElementById(id);
-  const state = {mode:'practice', category:'Todas', index:0, submitted:false};
+  const state = {mode:'practice', category:'Todas', index:0, submitted:false, comingSoon:false};
   let zoom=1, examTimer=null, examDeadline=0, examRunning=false;
   const categories = ['Todas', ...new Set(cortes.map(c => c.category))];
   $('category').innerHTML = categories.map(c => `<option>${c}</option>`).join('');
@@ -75,8 +83,43 @@
   const normalize = value => value.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
   const escapeHtml = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
+  function buildCutList() {
+    const grupos = [...new Set(cortes.map(c => c.ra))];
+    const ra1 = grupos.map(ra => {
+      const opciones = cortes
+        .filter(c => c.ra === ra)
+        .map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.title)}</option>`)
+        .join('');
+      return `<optgroup label="${escapeHtml(ra)}">${opciones}</optgroup>`;
+    }).join('');
+    const ra2 = `<optgroup label="RA2"><option value="__ra2__">RA2 · Próximamente</option></optgroup>`;
+    $('cut-select').innerHTML = ra1 + ra2;
+  }
+  buildCutList();
+
+  function renderComingSoon() {
+    stopTimer(); examRunning=false; state.comingSoon=true; state.submitted=false;
+    $('coming-soon').hidden=false;
+    document.querySelector('.image-shell').hidden=true;
+    document.querySelector('.question-card').hidden=true;
+    document.querySelector('.bottom').hidden=true;
+    $('ra-pill').textContent='RA2';
+    $('category-pill').textContent='';
+    $('status-pill').textContent='Próximamente';
+    $('counter').textContent='';
+    $('cut-select').value='__ra2__';
+    $('category').disabled=true;
+    document.querySelectorAll('[data-mode]').forEach(x=>x.disabled=true);
+  }
+
   function render() {
-    stopTimer(); examRunning=false;
+    stopTimer(); examRunning=false; state.comingSoon=false;
+    $('coming-soon').hidden=true;
+    document.querySelector('.image-shell').hidden=false;
+    document.querySelector('.question-card').hidden=false;
+    document.querySelector('.bottom').hidden=false;
+    $('category').disabled=false;
+    document.querySelectorAll('[data-mode]').forEach(x=>x.disabled=false);
     const c = current(); state.submitted = false;
     $('check').disabled=false;
     setZoom(1);
@@ -85,7 +128,11 @@
     $('timer').textContent='00:30';
     $('start-exam').hidden=false;
     $('slide-image').src = c.image; $('slide-image').alt = `Microfotografía del ${c.title.toLowerCase()}`;
-    $('slide-title').textContent = state.mode==='exam' ? 'Identifica las estructuras' : c.title; $('category-pill').textContent = c.category; $('status-pill').textContent = c.status;
+    $('slide-title').textContent = state.mode==='exam' ? 'Identifica las estructuras' : c.title;
+    $('ra-pill').textContent = c.ra;
+    $('category-pill').textContent = c.category;
+    $('status-pill').textContent = c.status;
+    $('cut-select').value = c.id;
     $('counter').textContent = `${state.index + 1} de ${filtered().length}`;
     $('source').textContent = state.mode==='exam' ? '' : c.source; $('bank-note').textContent = state.mode==='exam' ? 'Las fuentes y el nombre del preparado se muestran al entregar.' : c.note;
     $('mode-hint').textContent = {practice:'Escribe tus respuestas y compruébalas. Puedes volver a intentar.',study:'Las respuestas se muestran para que puedas observar y repasar.',exam:'Tienes 30 segundos por corte. Pulsa Iniciar examen; al terminar el tiempo se entregan tus respuestas.'}[state.mode];
@@ -140,7 +187,19 @@
   $('zoom-in').addEventListener('click',()=>setZoom(zoom+.5));
   $('zoom-out').addEventListener('click',()=>setZoom(zoom-.5));
   $('zoom-reset').addEventListener('click',()=>setZoom(1));
-  $('category').addEventListener('change',e => {state.category=e.target.value;state.index=0;render();});
+  $('cut-select').addEventListener('change',e => {
+    const selectedId = e.target.value;
+    if (selectedId === '__ra2__') {
+      renderComingSoon();
+      return;
+    }
+    state.category = 'Todas';
+    $('category').value = 'Todas';
+    state.index = cortes.findIndex(c => c.id === selectedId);
+    if (state.index < 0) state.index = 0;
+    render();
+  });
+  $('category').addEventListener('change',e => {state.comingSoon=false;state.category=e.target.value;state.index=0;render();});
   $('modes').addEventListener('click',e => {const b=e.target.closest('[data-mode]');if(!b)return;state.mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));$('check').disabled=false;render();});
   $('next').addEventListener('click',() => {state.index=(state.index+1)%filtered().length;$('check').disabled=false;render();});
   $('check').addEventListener('click',()=>check());
