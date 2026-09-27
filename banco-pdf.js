@@ -743,10 +743,10 @@ const cortesPdf = [
   {
     "id": "p05-03.jpg",
     "image": "p05-03.jpg",
-    "title": "Músculo cardíaco",
+    "title": "Músculo cardíaco · discos intercalares y estriaciones",
     "category": "Tejido muscular",
     "status": "PDF · página 5",
-    "source": "HISTO SIN ROTULAR.pdf, página 5; terminología cotejada con las guías de estudio adjuntas cuando corresponde.",
+    "source": "HISTO SIN ROTULAR.pdf, página 5; terminología cotejada con Apunte - Tejido muscular. En este corte longitudinal se distinguen cardiomiocitos, estriaciones transversales y discos intercalares.",
     "questions": [
       {
         "label": 1,
@@ -762,11 +762,51 @@ const cortesPdf = [
         "answers": [
           "Músculo cardíaco",
           "musculo cardiaco",
-          "tejido muscular cardíaco"
+          "tejido muscular cardíaco",
+          "músculo estriado cardíaco",
+          "musculo estriado cardiaco"
+        ]
+      },
+      {
+        "label": 2,
+        "marker": [
+          31,
+          36
+        ],
+        "target": [
+          42,
+          35
+        ],
+        "prompt": "¿Cómo se llama la línea transversal oscura señalada entre cardiomiocitos?",
+        "answers": [
+          "Disco intercalar",
+          "disco intercalares",
+          "discos intercalares",
+          "disco intercalado",
+          "discos intercalados"
+        ]
+      },
+      {
+        "label": 3,
+        "marker": [
+          70,
+          11
+        ],
+        "target": [
+          57,
+          18
+        ],
+        "prompt": "¿Cómo se llaman las bandas transversales repetidas visibles en el cardiomiocito?",
+        "answers": [
+          "Estriaciones transversales",
+          "estriaciones",
+          "estriación transversal",
+          "estriacion transversal",
+          "estriado transversal"
         ]
       }
     ],
-    "note": "La fotografía conserva las flechas rojas incluidas en el PDF original."
+    "note": "En este corte longitudinal sí se evalúan discos intercalares y estriaciones transversales porque se distinguen en las fibras cardíacas. La fotografía conserva las marcas incluidas en el preparado original."
   },
   {
     "id": "p06-01.jpg",
@@ -797,3 +837,4 @@ const cortesPdf = [
     "note": "La fotografía conserva las flechas rojas incluidas en el PDF original."
   }
 ];
+
