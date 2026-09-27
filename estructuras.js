@@ -946,5 +946,46 @@ const detalles = {
     "source": "Guía de estudio tejido epitelial, clasificación y glándulas endocrinas. Complemento: https://histologyguide.com/slideview/MH-151-thyroid/13-slide-1.html"
   }
 };
+// Revisión RA1 basada en las microfotografías rotuladas aportadas por el usuario.
+// Solo se evalúan estructuras que pueden señalarse de forma razonable en la imagen.
+detalles["original-hueso"] = {
+  questions: [
+    {label:1, marker:[65,43], target:[47,42], prompt:'Identifica la estructura señalada.', answers:['Conducto de Havers','canal de Havers','conducto central']},
+    {label:2, marker:[27,54], target:[40,48], prompt:'Identifica las capas de matriz señaladas.', answers:['Laminillas concéntricas','laminillas óseas concéntricas','lamelas concéntricas']},
+    {label:3, marker:[67,53], target:[50,45], prompt:'¿Cómo se llama la unidad estructural señalada?', answers:['Osteona','sistema de Havers']},
+    {label:4, marker:[72,36], target:[60,43], prompt:'Identifica la pequeña cavidad señalada.', answers:['Laguna ósea','laguna osteocitaria','osteoplasto']},
+    {label:5, marker:[19,69], target:[30,60], prompt:'Identifica las laminillas situadas entre osteonas.', answers:['Laminillas intersticiales','lamelas intersticiales']},
+    {label:6, marker:[72,66], target:[58,61], prompt:'Identifica el conducto transversal u oblicuo señalado.', answers:['Conducto de Volkmann','canal de Volkmann','conducto perforante']}
+  ],
+  note:'Revisado con las fotografías rotuladas: osteona, conducto de Havers, laminillas concéntricas e intersticiales, lagunas y conducto de Volkmann. No se evalúan canalículos si no se distinguen con claridad.'
+};
+
+detalles["original-adiposo"] = {
+  questions: [
+    {label:1, marker:[67,18], target:[55,27], prompt:'¿Qué tipo de tejido se observa?', answers:['Tejido adiposo blanco','tejido adiposo unilocular','tejido adiposo blanco unilocular']},
+    {label:2, marker:[31,26], target:[43,34], prompt:'¿Cómo se llama la célula señalada?', answers:['Adipocito unilocular','adipocito blanco','adipocito']},
+    {label:3, marker:[68,42], target:[52,43], prompt:'¿Qué componente ocupaba el gran espacio claro del adipocito antes del procesamiento?', answers:['Gota lipídica','gota de lípido','vacuola lipídica','lípido']},
+    {label:4, marker:[67,55], target:[53,50], prompt:'Identifica la fina franja celular periférica señalada.', answers:['Citoplasma del adipocito','citoplasma periférico','citoplasma']},
+    {label:5, marker:[31,58], target:[40,51], prompt:'Identifica la estructura periférica oscura del adipocito.', answers:['Núcleo del adipocito','núcleo periférico','nucleo del adipocito']}
+  ],
+  note:'Revisado con la fotografía rotulada de tejido adiposo blanco. Se priorizan adipocito, gota lipídica, citoplasma periférico y núcleo periférico.'
+};
+
+detalles["cartilago-hialino"] = {
+  questions: [
+    {label:1, marker:[76,17], target:[63,23], prompt:'¿Qué tipo de cartílago se observa?', answers:['Cartílago hialino','cartilago hialino']},
+    {label:2, marker:[63,9], target:[54,13], prompt:'¿Cómo se llama la célula madura señalada?', answers:['Condrocito']},
+    {label:3, marker:[30,15], target:[42,19], prompt:'¿Cómo se llama la cavidad que aloja al condrocito?', answers:['Laguna cartilaginosa','laguna','condroplasto']},
+    {label:4, marker:[24,27], target:[35,33], prompt:'Identifica el conjunto de condrocitos señalado.', answers:['Grupo isógeno','grupo isogénico','grupo isogeno']},
+    {label:5, marker:[76,34], target:[65,30], prompt:'Identifica la matriz situada entre los territorios celulares.', answers:['Matriz interterritorial','matriz cartilaginosa interterritorial']},
+    {label:6, marker:[13,66], target:[20,57], prompt:'¿Cómo se llama el tejido conjuntivo que rodea al cartílago?', answers:['Pericondrio']},
+    {label:7, marker:[24,52], target:[33,47], prompt:'Identifica la matriz más basófila que rodea al condrocito o grupo isógeno.', answers:['Matriz territorial','matriz cartilaginosa territorial']},
+    {label:8, marker:[71,48], target:[61,43], prompt:'Identifica la matriz inmediatamente adyacente a la laguna.', answers:['Matriz capsular','matriz pericelular','matriz capsular o pericelular']},
+    {label:9, marker:[22,72], target:[29,63], prompt:'Identifica la célula fusiforme de la zona externa del pericondrio.', answers:['Fibroblasto','fibroblastos']},
+    {label:10, marker:[40,68], target:[43,58], prompt:'Identifica la célula formadora de cartílago próxima al pericondrio.', answers:['Condroblasto','condroblastos']}
+  ],
+  note:'Revisado con las fotografías rotuladas: pericondrio, fibroblastos, condroblastos, condrocitos, lagunas, grupos isógenos y matrices capsular, territorial e interterritorial.'
+};
+
 for (const corte of cortes) { if(detalles[corte.id]) Object.assign(corte, detalles[corte.id]); }
 }
