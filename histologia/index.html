@@ -33,7 +33,7 @@
     <div class="workspace">
       <div class="coming-soon" id="coming-soon" hidden><span class="pill">RA2</span><h2>Próximamente</h2><p>Los cortes correspondientes al RA2 se agregarán aquí.</p></div>
       <div class="image-shell"><div class="zoom-controls"><button id="zoom-out" type="button" aria-label="Alejar">−</button><output id="zoom-level">100 %</output><button id="zoom-in" type="button" aria-label="Acercar">+</button><button id="zoom-reset" type="button">Ajustar</button><small>Desliza para recorrer la imagen ampliada.</small></div><div class="viewport" id="viewport"><div class="image-frame" id="image-frame"><img id="slide-image" alt=""><svg class="arrows" id="arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg><div id="markers"></div></div></div><p class="caption">Los números están fuera de las estructuras; la punta de cada flecha indica el lugar observado.</p></div>
-      <section class="question-card" aria-live="polite"><h2 id="slide-title"></h2><p class="hint" id="mode-hint"></p><div class="timer" id="timer-box" hidden><span id="timer" role="timer" aria-label="Tiempo restante">00:30</span> · 30 segundos por corte <button type="button" id="start-exam">Iniciar examen</button></div><div id="questions"></div><div class="actions" id="actions"><button class="primary" id="check" type="button">Comprobar</button><button id="reset" type="button">Reintentar</button></div><div class="score" id="score" role="status"></div><p class="source" id="source"></p></section>
+      <section class="question-card" aria-live="polite"><h2 id="slide-title"></h2><p class="hint" id="mode-hint"></p><div class="timer" id="timer-box" hidden><span id="timer" role="timer" aria-label="Tiempo restante">00:30</span> · 30 segundos por corte <button type="button" id="start-exam">Iniciar examen</button></div><div id="questions"></div><button id="info-button" type="button">ⓘ Ver información del corte</button><div class="study-answer" id="cut-info" hidden></div><div class="actions" id="actions"><button class="primary" id="check" type="button">Comprobar</button><button id="reset" type="button">Reintentar</button></div><div class="score" id="score" role="status"></div><p class="source" id="source"></p></section>
     </div>
     <div class="bottom"><p id="bank-note"></p><button class="primary" type="button" id="next">Siguiente corte →</button></div>
   </div></main>
@@ -140,7 +140,7 @@
     $('arrows').innerHTML = c.questions.map(q => `<defs><marker id="tip-${q.label}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="2.3" markerHeight="2.3" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#a21caf"/></marker></defs><line x1="${q.marker[0]}" y1="${q.marker[1]}" x2="${q.target[0]}" y2="${q.target[1]}"/><line class="shaft" x1="${q.marker[0]}" y1="${q.marker[1]}" x2="${q.target[0]}" y2="${q.target[1]}" marker-end="url(#tip-${q.label})"/>`).join('');
     $('markers').innerHTML = c.questions.map(q => `<span class="marker" style="left:${q.marker[0]}%;top:${q.marker[1]}%" aria-hidden="true">${q.label}</span>`).join('');
     $('questions').innerHTML = c.questions.map((q,i) => `<div class="item"><label class="item-head" for="answer-${i}"><span class="number">${q.label}</span>${escapeHtml(q.prompt)}</label>${state.mode === 'study' ? `<p class="study-answer">${escapeHtml(q.answers[0])}</p>` : `<input class="answer" id="answer-${i}" autocomplete="off" spellcheck="false" placeholder="Escribe tu respuesta"><p class="feedback" id="feedback-${i}"></p>`}</div>`).join('');
-    $('actions').hidden = state.mode === 'study'; $('check').textContent = state.mode === 'exam' ? 'Entregar examen' : 'Comprobar';
+    $('cut-info').hidden=true;$('cut-info').textContent=c.note+' '+c.source;$('actions').hidden = state.mode === 'study'; $('check').textContent = state.mode === 'exam' ? 'Entregar examen' : 'Comprobar';
     $('reset').hidden = state.mode === 'exam'; $('score').textContent = '';
     if(state.mode==='exam'){document.querySelectorAll('.answer').forEach(x=>x.disabled=true);$('check').disabled=true;}
   }
@@ -203,6 +203,7 @@
   $('category').addEventListener('change',e => {state.comingSoon=false;state.category=e.target.value;state.index=0;render();});
   $('modes').addEventListener('click',e => {const b=e.target.closest('[data-mode]');if(!b)return;state.mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));$('check').disabled=false;render();});
   $('next').addEventListener('click',() => {state.index=(state.index+1)%filtered().length;$('check').disabled=false;render();});
+  $('info-button').addEventListener('click',()=>{$('cut-info').hidden=!$('cut-info').hidden;});
   $('check').addEventListener('click',()=>check());
   $('reset').addEventListener('click',render);
   document.addEventListener('keydown',e => {if(e.key==='Enter' && e.target.matches('.answer'))check();});
